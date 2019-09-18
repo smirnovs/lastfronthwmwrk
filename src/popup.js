@@ -1,17 +1,22 @@
 import { userName, userJob } from './user.js';
-import { form, addButton } from './cardlist.js';
+import { addButton, popupCards } from './cardlist.js';
 import { api } from './api.js';
 
 export const popupImageContainer = document.querySelector('.popup__image');
 const popupImage = popupImageContainer.querySelector('.popup__big-image');
-export const popupEdit = document.querySelector('.popup__useredit');
-export const editButton = popupEdit.querySelector('.popup__button_edit');
+const popupEdit = document.querySelector('.popup__useredit');
+const editButton = popupEdit.querySelector('.popup__button_edit');
+const openCardsPop = document.querySelector('.user-info__button');
+const openEditPop = document.querySelector('.user-info__edit');
 
-export const errorName = document.querySelector('.popup__error_name');
-export const errorUser = document.querySelector('.popup__error_username');
-export const errorJob = document.querySelector('.popup__error_userjob');
-export const errorUrl = document.querySelector('.popup__error_url');
+const popupContainer = document.querySelector('.popups');
 
+const errorName = document.querySelector('.popup__error_name');
+const errorUser = document.querySelector('.popup__error_username');
+const errorJob = document.querySelector('.popup__error_userjob');
+const errorUrl = document.querySelector('.popup__error_url');
+
+export const form = document.forms.new;
 export const editForm = document.forms.edit;
 export const username = editForm.elements.username;
 export const job = editForm.elements.userjob;
@@ -83,7 +88,7 @@ class Popup {
   disableButton(button) {
     button.setAttribute('disabled', true);
     button.style.backgroundColor = 'transparent';
-    button.style.color = 'rgba(#000, .2)';
+    button.style.color = 'rgba(0, 0, 0, 0.2)';
   }
   enableButton(button) {
     button.removeAttribute('disabled');
@@ -112,3 +117,37 @@ class Popup {
   }
 }
 export const popup = new Popup();
+
+openCardsPop.addEventListener('click', function() {
+  popup.open(popupCards);
+  popup.reset(form);
+  popup.checkUrl(errorUrl);
+  popup.checkName(errorName, name);
+});
+
+openEditPop.addEventListener('click', function() {
+  popup.open(popupEdit);
+  popup.fillField(editForm);
+  popup.checkName(errorUser, username);
+  popup.checkName(errorJob, job);
+  popup.enableButton(editButton);
+});
+
+popupContainer.addEventListener('click', function(event) {
+  if (event.target.classList.contains('popup__close')) {
+    const popupName = event.target.parentNode.parentNode;
+    popup.close(popupName);
+  }
+});
+
+popupEdit.addEventListener('submit', function() {
+  popup.editUser(event);
+});
+
+form.addEventListener('input', function() {
+  popup.validateAddCardButton();
+});
+
+editForm.addEventListener('input', function() {
+  popup.validateEditUserButton();
+});

@@ -1,13 +1,11 @@
-import { popup, name, link } from './popup.js';
-import { api } from './api.js';
+import { popup, form, name, link, popupImageContainer } from './popup.js';
 import { Card } from './card.js';
 
 export const cardContainer = document.querySelector('.places-list');
 export const popupCards = document.querySelector('.popup__cards');
 export const addButton = popupCards.querySelector('.popup__button_add');
-export const form = document.forms.new;
 
-class Cardlist {
+export class Cardlist {
   constructor(container, cards) {
     this.cards = cards;
     this.container = container;
@@ -21,6 +19,10 @@ class Cardlist {
     }
     if (event.target.classList.contains('place-card__delete-icon')) {
       event.target.closest('.place-card').remove();
+    }
+    if (event.target.classList.contains('place-card__image')) {
+      popup.open(popupImageContainer);
+      popup.setImg();
     }
   }
 
@@ -46,9 +48,3 @@ class Cardlist {
     cardContainer.addEventListener('click', this.cardActions);
   }
 }
-
-api.getInitialCards().then(cards => {
-  if (cards && cards.length > 0) {
-    new Cardlist(cardContainer, cards);
-  }
-});
