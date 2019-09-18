@@ -1,0 +1,24 @@
+{
+  "name": "lastfronthwmwrk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack-dev-server --mode development --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smirnovs/lastfronthwmwrk.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smirnovs/lastfronthwmwrk/issues"
+  },
+  "homepage": "https://github.com/smirnovs/lastfronthwmwrk#readme",
+  "devDependencies": {
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.9"
+  }
+}
