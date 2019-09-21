@@ -1,3 +1,5 @@
+const serverUrl = NODE_ENV === 'development' ? 'http://praktikum.tk/cohort2' : 'https://praktikum.tk/cohort2'
+
 class Api {
   constructor({ baseUrl, headers }) {
     this.url = baseUrl;
@@ -58,9 +60,10 @@ class Api {
 }
 
 export const api = new Api({
-  baseUrl: 'http://95.216.175.5/cohort2',
+  baseUrl: serverUrl,
   headers: {
     authorization: '9b5510e1-e0ed-4f9f-8a0a-8043e75d5894',
     'Content-Type': 'application/json'
   }
 });
+
