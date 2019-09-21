@@ -1,3 +1,4 @@
+import "./style.css";
 import { cardContainer, Cardlist } from './cardlist.js';
 import { api } from './api.js';
 import { user } from './user.js';
