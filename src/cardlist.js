@@ -1,12 +1,11 @@
 import { popup, addButton, popupCards} from './popup.js';
 import { Card } from './card.js';
 
-export const cardContainer = document.querySelector('.places-list');
-
 export class Cardlist {
   constructor(container, cards) {
     this.cards = cards;
     this.container = container;
+    this.addCard = this.addCard.bind(this);
     this.addListener();
     this.render();
   }
@@ -26,9 +25,7 @@ export class Cardlist {
     const fieldLink = popup.returnValue().linkValue;   
     const cardElement = new Card(fieldName, fieldLink);
     
-    this.container.bind(this);
-    console.log(this.container);
-    cardContainer.appendChild(cardElement.cardElement);
+    this.container.appendChild(cardElement.cardElement);
     
     const formname = event.target.parentNode.parentNode;
     popup.close(formname);

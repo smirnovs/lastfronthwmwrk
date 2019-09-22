@@ -1,7 +1,9 @@
 import "./style.css";
-import { cardContainer, Cardlist } from './cardlist.js';
+import { Cardlist } from './cardlist.js';
 import { api } from './api.js';
 import { user } from './user.js';
+
+const cardContainer = document.querySelector('.places-list');
 
 api.getInitialCards().then(cards => {
   if (cards && cards.length > 0) {
