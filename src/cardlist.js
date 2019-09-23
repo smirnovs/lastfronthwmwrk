@@ -21,11 +21,10 @@ export class Cardlist {
 
   addCard(event) {
     event.preventDefault();    
-    const fieldName = popup.returnValue().nameValue;
-    const fieldLink = popup.returnValue().linkValue;   
-    const cardElement = new Card(fieldName, fieldLink);
+    const { nameValue, linkValue } = popup.returnValue();
+    const  { cardElement } = new Card(nameValue, linkValue);
     
-    this.container.appendChild(cardElement.cardElement);
+    this.container.appendChild(cardElement);
     
     const formname = event.target.parentNode.parentNode;
     popup.close(formname);
