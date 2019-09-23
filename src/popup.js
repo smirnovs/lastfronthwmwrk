@@ -1,14 +1,17 @@
 import { userName, userJob } from './user.js';
-import { addButton, popupCards } from './cardlist.js';
 import { api } from './api.js';
 
-export const popupImageContainer = document.querySelector('.popup__image');
+
+export const popupCards = document.querySelector('.popup__cards');
+export const addButton = popupCards.querySelector('.popup__button_add');
+const popupImageContainer = document.querySelector('.popup__image');
 const popupImage = popupImageContainer.querySelector('.popup__big-image');
 const popupEdit = document.querySelector('.popup__useredit');
+
 const editButton = popupEdit.querySelector('.popup__button_edit');
 const openCardsPop = document.querySelector('.user-info__button');
 const openEditPop = document.querySelector('.user-info__edit');
-
+const openImagePop = document.querySelector('.places-list');
 const popupContainer = document.querySelector('.popups');
 
 const errorName = document.querySelector('.popup__error_name');
@@ -16,22 +19,27 @@ const errorUser = document.querySelector('.popup__error_username');
 const errorJob = document.querySelector('.popup__error_userjob');
 const errorUrl = document.querySelector('.popup__error_url');
 
-export const form = document.forms.new;
-export const editForm = document.forms.edit;
-export const username = editForm.elements.username;
-export const job = editForm.elements.userjob;
-export const name = form.elements.name;
-export const link = form.elements.link;
+const form = document.forms.new;
+const editForm = document.forms.edit;
+const username = editForm.elements.username;
+const job = editForm.elements.userjob;
+const name = form.elements.name;
+const link = form.elements.link;
 
 class Popup {
+  returnValue(){
+    const nameValue = name.value;
+    const linkValue = link.value;
+    return {nameValue, linkValue}
+  }
   open(formname) {
     formname.classList.toggle('popup_is-opened');
   }
   close(formname) {
     formname.classList.toggle('popup_is-opened');
   }
-  reset(formname) {
-    formname.reset();
+  reset() {
+    form.reset();
   }
 
   checkName(error, field) {
@@ -131,6 +139,13 @@ openEditPop.addEventListener('click', function() {
   popup.checkName(errorUser, username);
   popup.checkName(errorJob, job);
   popup.enableButton(editButton);
+});
+
+openImagePop.addEventListener('click', function(){
+  if(event.target.classList.contains('place-card__image')){
+    popup.open(popupImageContainer);
+    popup.setImg();
+  }
 });
 
 popupContainer.addEventListener('click', function(event) {
